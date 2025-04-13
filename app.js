@@ -34,7 +34,13 @@ app.set('views', path.join(rootDir, 'views'));
 
 // Routes
 app.use(userRouter);
-app.use('/host', hostRouter);
+app.use('/host', (req, res, next) => {
+  if (req.session.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+});
 app.use(authRouter);
 
 // Error handling
