@@ -1,0 +1,110 @@
+<div class="nav-container">
+  <a href="/" class="home-link">Home</a>
+  <button class="hamburger-menu">☰</button>
+  <nav class="nav-links">
+    <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+      <% if (typeof userType !== 'undefined' && userType === 'guest') { %>
+        <!-- Guest Links -->
+        <a href="/favourites" class="btn btn-primary">
+          Favourites
+        </a>
+        <a href="/bookings" class="btn btn-primary">
+          Bookings
+        </a>
+        <a href="/profile" class="btn btn-primary">
+          Profile
+        </a>
+      <% } else if (userType === 'host') { %>
+        <!-- Host Links -->
+        <a href="/host/host-home-list" class="btn btn-primary">
+          Host Homes
+        </a>
+        <a href="/host/add-home" class="btn btn-primary">
+          Add Home
+        </a>
+      <% } %>
+      <!-- Logout (for both host and guest) -->
+      <form action="/logout" method="post">
+        <button class="btn btn-secondary">
+          Logout
+        </button>
+      </form>
+    <% } else { %>
+      <!-- Not Logged In -->
+      <a href="/login" class="btn btn-primary">
+        Login
+      </a>
+      <a href="/signup" class="btn btn-primary">
+        Signup
+      </a>
+    <% } %>
+  </nav>
+</div>
+
+<style>
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .home-link {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .hamburger-menu {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 4rem;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .nav-links a,
+    .nav-links button {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .hamburger-menu {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburgerMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  });
+</script>

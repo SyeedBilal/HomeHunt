@@ -1,0 +1,49 @@
+/* ...existing code... */
+
+/* Fix for Mobile Navigation */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.hamburger-menu {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a,
+  .nav-links button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .logout-form {
+    width: 100%;
+  }
+}

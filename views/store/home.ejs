@@ -1,0 +1,67 @@
+<%- include('../partials/head') %>
+<body class="page-gradient">
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container nav-container">
+      <h1 class="home-title">Welcome to Home Hunt</h1>
+      <button class="hamburger-menu">☰</button>
+      <nav class="nav-links">
+        <% if (isLoggedIn) { %>
+          <% if (user.userType === 'guest') { %>
+            <a href="/favourites" class="btn btn-primary">Favourites</a>
+            <a href="/bookings" class="btn btn-primary">Bookings</a>
+            <a href="/profile" class="btn btn-primary">Profile</a>
+          <% } else if (user.userType === 'host') { %>
+            <a href="/host/host-home-list" class="btn btn-primary">Host Homes</a>
+            <a href="/host/add-home" class="btn btn-primary">Add Home</a>
+          <% } %>
+          <form action="/logout" method="post" class="logout-form">
+            <button class="btn btn-secondary">Logout</button>
+          </form>
+        <% } else { %>
+          <a href="/login" class="btn btn-primary">Login</a>
+          <a href="/signup" class="btn btn-primary">Signup</a>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Registered Homes Section -->
+  <section class="container">
+    <div class="card-grid">
+      <% registeredHomes.forEach((home) => { %>
+        <div class="home-item">
+          <img src="<%= home.photoUrl %>" alt="<%= home.houseName %>" class="home-image">
+          <div class="home-details">
+            <h2 class="home-title"><%= home.houseName %></h2>
+            <p class="home-location"><%= home.location %></p>
+            <p class="home-price">$<%= home.price %> / night</p>
+            <div class="mt-1">
+              <% if (isLoggedIn) { %>
+                <button class="btn btn-secondary">Book Now</button>
+                <a href="/homes/<%= home._id %>" class="btn btn-primary">View Details</a>
+              <% } else { %>
+                <a href="/login" class="btn btn-primary">Login to Book</a>
+              <% } %>
+            </div>
+            <% if (home.description) { %>
+              <p class="mt-2"><%= home.description %></p>
+            <% } %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburgerMenu = document.querySelector('.hamburger-menu');
+      const navLinks = document.querySelector('.nav-links');
+
+      hamburgerMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

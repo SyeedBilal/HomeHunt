@@ -1,0 +1,9 @@
+<!-- important concept of sending the data or editing the data in the file -->
+
+<!-- NEED ONLY ID HERE TO SAVE IT INTO FAVIOURITES FILES-->
+
+
+<form action="/favourites" method="POST">
+  <button type="submit" class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition">Add To faviourites</button>
+  <input type="hidden" name="homeId" value="<%= home._id %>">
+</form>

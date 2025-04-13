@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/css/host.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="body-bg">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="logo">Airbnb Clone</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/bookings">My Bookings</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Listings -->
+  <section class="listings">
+    <h1 class="listings-title">Available Homes</h1>
+    
+    <div class="homes-grid">
+      <% registeredHomes.forEach((home) => { %>
+        <div class="home-card">
+          <div class="image-container">
+            <img src="<%= home.photoUrl %>" alt="<%= home.houseName %>" class="home-image" />
+            <div class="active-badge">Active</div>
+          </div>
+
+          <div class="home-details">
+            <div class="home-header">
+              <h2 class="home-name"><%= home.houseName %></h2>
+              <div class="home-rating">★ <%= home.rating %></div>
+            </div>
+
+            <div class="home-location">
+              <span class="location-icon">📍</span>
+              <p><%= home.location %></p>
+            </div>
+
+            <div class="home-price">
+              <p class="price">$<%= home.price %></p>
+              <p class="price-note">per night</p>
+            </div>
+
+            <div class="home-actions">
+              <a href="/host/edit-home/<%= home._id %>?editing=true" class="edit-button">Edit Details</a>
+              <a href="/host/delete-home/<%= home._id %>" class="delete-button">Remove Listing</a>
+            </div>
+
+            <div class="home-stats">
+              <div class="stat-box">
+                <p class="stat-label">Total Bookings</p>
+                <p class="stat-value">12</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-label">Revenue</p>
+                <p class="stat-value">$2,400</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Airbnb Clone. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

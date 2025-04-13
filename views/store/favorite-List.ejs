@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page-gradient">
+  <header class="main-header">
+    <div class="container nav-container">
+      <h1 class="home-title">My Favorites</h1>
+      <nav class="nav-links">
+        <%- include("../partials/header.ejs", { 
+          isLoggedIn: isLoggedIn, 
+          userType: user ? user.userType : null,
+          user: user 
+        }) %>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container favorites-container">
+    <h1 class="favorites-title">My Favorites</h1>
+
+    <div class="favorites-grid">
+      <% if (favouritesWithDetail && favouritesWithDetail.length > 0) { %>
+        <% favouritesWithDetail.forEach(home => { %>
+          <div class="favorite-item">
+            <img src="https://a0.muscache.com/im/pictures/d03d9889-b6c3-42f5-ad84-2c6c4b7a57b2.jpg" 
+                 alt="<%= home.houseName %>" 
+                 class="favorite-image">
+            <div class="favorite-details">
+              <h2 class="favorite-title"><%= home.housename %></h2>
+              <p class="favorite-location"><%= home.location %></p>
+              <p class="favorite-price">$<%= home.price %> / night</p>
+              <div class="favorite-actions">
+                <a href="/delete-fav-home/<%=home._id %>" class="btn btn-red" name="homeId">
+                  Remove from Favorites
+                </a>
+                <button class="btn btn-secondary">
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="empty-favorites">
+          <p>No favorites added yet.</p>
+          <a href="/" class="btn btn-primary">Browse Homes</a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

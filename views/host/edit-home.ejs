@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/css/host.css">
+  
+</head>
+<body>
+  <header>
+    <h1><%= editing ? "Edit" : "Register" %> Your Home</h1>
+  </header>
+
+  <div class="form-container">
+    <form action="/host/<%= editing ? "edit-home" : "add-home" %>" method="POST" enctype="multipart/form-data">
+      <!-- Hidden ID Field -->
+      <input type="hidden" name="id" value="<%= editing ? home._id : '' %>">
+
+      <!-- House Name -->
+      <input type="text" 
+             name="houseName" 
+             placeholder="Enter Name of Your House" 
+             value="<%= editing ? home.houseName : '' %>" 
+             required />
+
+      <!-- Price -->
+      <input type="text" 
+             name="price" 
+             placeholder="Price per night" 
+             value="<%= editing ? home.price : '' %>" 
+             required />
+
+      <!-- Location -->
+      <input type="text" 
+             name="location" 
+             placeholder="Location" 
+             value="<%= editing ? home.location : '' %>" 
+             required />
+
+      <!-- Rating -->
+      <input type="number" 
+             name="rating" 
+             placeholder="Rating (1-5)" 
+             min="1" 
+             max="5" 
+             value="<%= editing ? home.rating : '' %>" 
+             required />
+
+      <!-- Photo URL -->
+      <input type="file" 
+             name="photoUrl" 
+             accept="image/*"/>
+
+      <!-- Description -->
+      <textarea name="description" 
+                placeholder="Enter Description" 
+                required><%= editing ? home.description : '' %></textarea>
+
+      <!-- Submit Button -->
+      <input type="submit" 
+             value="<%= editing ? "Update" : "Submit" %>" />
+    </form>
+  </div>
+</body>
+</html>
